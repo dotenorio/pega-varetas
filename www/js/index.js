@@ -25,7 +25,7 @@ var colors = [
   },
   {
     title: 'Preto',
-    backgroundColor: 'grey-900',
+    backgroundColor: 'black',
     buttonColor: 'grey-300',
     points: 100
   }
