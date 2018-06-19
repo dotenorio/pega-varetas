@@ -16,26 +16,24 @@
   <div class="content grey-600">
     <div class="padding white header-players">
       <button class="icon ion-plus grey-600 circle right"></button>
-      <button class="grey-600 circle">F</button>
-      <button class="border-grey-600 text-grey-600 circle">J</button>
-      <button class="border-grey-600 text-grey-600 circle">M</button>
+      <button class="border-grey-600 text-grey-600 circle $$getPlayerClass{active}" onclick="loadPlayer($$index)" data='players' id='player-$$index'>$$getPlayerFirstLetter{name}</button>
     </div>
     <div class="padding">
       <div class="arrow-up"></div>
       <div class="padding align-center">
-        <h3 class="font-titan">1000 pts</h3>
-        <p class="font-share">Fernando</p>
+        <h3 class="font-titan" id="player-total-points">0 pontos</h3>
+        <p class="font-share" id="player-name">Jogador</p>
       </div>
       <div class="row vertical-align-center padding ${backgroundColor} align-center" data="colors">
         <div class="col">
-          <button class="icon ion-minus ${buttonColor} circle"></button>
+          <button class="icon ion-minus ${buttonColor} circle" onclick="removeItem('${id}')"></button>
         </div>
         <div class="col">
-          <h3 class="font-titan">0</h3>
+          <h3 class="font-titan" id="player-qty-${id}">0</h3>
           <p class="font-share">${title} (${points} pontos)</p>
         </div>
         <div class="col">
-          <button class="icon ion-plus ${buttonColor} circle"></button>
+          <button class="icon ion-plus ${buttonColor} circle" onclick="addItem('${id}')"></button>
         </div>
       </div>
     </div>

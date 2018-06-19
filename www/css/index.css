@@ -19,6 +19,12 @@ h3 {
   border-bottom: 20px solid #757575;
   position: absolute;
   margin-top: -29px;
-  /* margin-left: 45px;
-  margin-left: 93px; */
+}
+.player {
+  margin: 0 3px;
+}
+
+.active-player {
+  background-color: #757575!important;
+  color: #FFF;
 }
