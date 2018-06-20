@@ -19,12 +19,35 @@ h3 {
   border-bottom: 20px solid #757575;
   position: absolute;
   margin-top: -29px;
+  margin-left: 4px;
+}
+.arrow-0 {
+  margin-left: 4px;
+}
+.arrow-1 {
+  margin-left: 52px;
+}
+.arrow-2 {
+  margin-left: 100px;
+}
+.arrow-3 {
+  margin-left: 148px;
+}
+.arrow-4 {
+  margin-left: 196px;
+}
+.arrow-5 {
+  margin-left: 244px;
 }
 .player {
   margin: 0 3px;
 }
-
 .active-player {
   background-color: #757575!important;
   color: #FFF;
+}
+.edit-player {
+  position: absolute;
+  right: 10px;
+  top: 105px;
 }

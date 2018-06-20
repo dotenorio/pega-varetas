@@ -15,12 +15,13 @@
 <body>
   <div class="content grey-600">
     <div class="padding white header-players">
-      <button class="icon ion-plus grey-600 circle right"></button>
+      <button class="icon ion-plus text-grey-600 right"></button>
       <button class="border-grey-600 text-grey-600 circle $$getPlayerClass{active}" onclick="loadPlayer($$index)" data='players' id='player-$$index'>$$getPlayerFirstLetter{name}</button>
     </div>
     <div class="padding">
-      <div class="arrow-up"></div>
-      <div class="padding align-center">
+      <div class="arrow-up" id="arrow-active-player"></div>
+      <div class="padding align-center-">
+        <button class="icon ion-edit text-white edit-player"></button>
         <h3 class="font-titan" id="player-total-points">0 pontos</h3>
         <p class="font-share" id="player-name">Jogador</p>
       </div>

@@ -36,53 +36,33 @@ var colors = [
   }
 ]
 
-var players = [
-  {
-    name: 'Fernando',
-    qty: {
-      yellow: 0,
-      green: 0,
-      blue: 0,
-      red: 0,
-      black: 0
-    },
-    active: true
-  },
-  {
-    name: 'Joaquim',
-    qty: {
-      yellow: 0,
-      green: 0,
-      blue: 0,
-      red: 0,
-      black: 0
-    },
-    active: false
-  },
-  {
-    name: 'Maria',
-    qty: {
-      yellow: 0,
-      green: 0,
-      blue: 0,
-      red: 0,
-      black: 0
-    },
-    active: false
-  }
-]
+var players = []
+
+if (window.localStorage.getItem('players')) {
+  players = JSON.parse(window.localStorage.getItem('players'))
+}
 
 MobileUI.getPlayerFirstLetter = function (name) {
-  return name[0]
+  return name[0].toUpperCase()
 }
 
 MobileUI.getPlayerClass = function (active) {
   return (active) ? 'player active-player' : 'player'
 }
 
+function save () {
+  window.localStorage.setItem('players', JSON.stringify(players))
+}
+
 function getColor (colorId) {
   return colors.filter(function (color) {
     return color.id === colorId
+  })[0]
+}
+
+function getActivePlayer () {
+  return players.filter(function (player) {
+    return player.active
   })[0]
 }
 
@@ -97,30 +77,40 @@ function setActive (index) {
     return player
   })
   document.getElementById('player-' + index).classList.add('active-player')
+  document.getElementById('arrow-active-player').className = 'arrow-up arrow-' + index
 }
 
-function loadPlayer (index) {
-  var player = players[index]
+function setTotal (player) {
   var totalPoints = 0
-
-  setActive(index)
-
   for (var colorId in player.qty) {
-    var qty = player.qty[colorId]
+    var qty = (player.qty[colorId] >= 0) ? player.qty[colorId] : 0
     var points = getColor(colorId).points
     document.getElementById('player-qty-' + colorId).innerHTML = qty
     totalPoints += (qty * points)
   }
-  document.getElementById('player-name').innerHTML = player.name
   document.getElementById('player-total-points').innerHTML = totalPoints + ' pontos'
+  save()
 }
 
-function removeItem (color) {
-  alert(color)
+function loadPlayer (index) {
+  var player = players[index]
+
+  setActive(index)
+  setTotal(player)
+
+  document.getElementById('player-name').innerHTML = player.name
 }
 
-function addItem (color) {
-  alert(color)
+function removeItem (colorId) {
+  var player = getActivePlayer()
+  player.qty[colorId]--
+  setTotal(player)
+}
+
+function addItem (colorId) {
+  var player = getActivePlayer()
+  player.qty[colorId]++
+  setTotal(player)
 }
 
 window.onload = function () {
