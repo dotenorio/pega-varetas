@@ -98,7 +98,7 @@ function loadPlayer (index) {
   setTimeout(function () {
     setActive(index)
     setTotal(player)
-  }, 500);
+  }, 1)
 
   document.getElementById('player-name').innerHTML = player.name
 }
@@ -133,8 +133,12 @@ function addPlayer () {
 }
 
 window.onload = function () {
-  if (players.length > 0) {
+  var length = players.length
+  if (length > 0) {
     loadPlayer(0)
+    if (length === 6) {
+      document.getElementById('button-add-player').style.display = 'none'
+    }
   } else {
     document.getElementById('player-content').style.display = 'none'
     document.getElementById('no-player-content').style.display = 'block'
