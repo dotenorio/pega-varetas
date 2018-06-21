@@ -51,3 +51,9 @@ h3 {
   right: 10px;
   top: 105px;
 }
+#no-player-content {
+  display: none;
+}
+#no-player-content .row {
+  height: 100%;
+}

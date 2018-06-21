@@ -95,8 +95,10 @@ function setTotal (player) {
 function loadPlayer (index) {
   var player = players[index]
 
-  setActive(index)
-  setTotal(player)
+  setTimeout(function () {
+    setActive(index)
+    setTotal(player)
+  }, 500);
 
   document.getElementById('player-name').innerHTML = player.name
 }
@@ -113,6 +115,28 @@ function addItem (colorId) {
   setTotal(player)
 }
 
-window.onload = function () {
+function addPlayer () {
+  document.getElementById('player-content').style.display = 'block'
+  document.getElementById('no-player-content').style.display = 'none'
+  players[0] = {
+    name: 'Fernando',
+    qty: {
+      yellow: 0,
+      green: 0,
+      blue: 0,
+      red: 0,
+      black: 0
+    },
+    active: true
+  }
   loadPlayer(0)
+}
+
+window.onload = function () {
+  if (players.length > 0) {
+    loadPlayer(0)
+  } else {
+    document.getElementById('player-content').style.display = 'none'
+    document.getElementById('no-player-content').style.display = 'block'
+  }
 }
