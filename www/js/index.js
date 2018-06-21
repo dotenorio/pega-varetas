@@ -98,7 +98,7 @@ function loadPlayer (index) {
   setTimeout(function () {
     setActive(index)
     setTotal(player)
-  }, 1)
+  }, 100)
 
   document.getElementById('player-name').innerHTML = player.name
 }
@@ -115,11 +115,12 @@ function addItem (colorId) {
   setTotal(player)
 }
 
-function addPlayer () {
-  document.getElementById('player-content').style.display = 'block'
-  document.getElementById('no-player-content').style.display = 'none'
-  players[0] = {
-    name: 'Fernando',
+function savePlayer (playerForm) {
+  MobileUI.show('player-content')
+  MobileUI.hide('no-player-content')
+
+  players.push({
+    name: playerForm.name,
     qty: {
       yellow: 0,
       green: 0,
@@ -128,8 +129,54 @@ function addPlayer () {
       black: 0
     },
     active: true
-  }
-  loadPlayer(0)
+  })
+
+  MobileUI.clearForm('player-form')
+
+  loadPlayer(players.length - 1)
+}
+
+function addPlayer () {
+  MobileUI.hide('button-delete-player')
+  alert({
+    title: 'Jogador',
+    message: ' ',
+    template: 'alert-player',
+    buttons: [
+      {
+        label: 'Salvar',
+        class: 'text-green',
+        onclick: function () {
+          var playerForm = MobileUI.objectByForm('player-form')
+          if (!playerForm.name) {
+            alert({
+              message: 'Ei, você precisa dar um nome ao jogador.',
+              class: 'red',
+              buttons: [
+                {
+                  label: 'OK',
+                  class: 'text-white',
+                  onclick: function () {
+                    closeAlert()
+                  }
+                }
+              ]
+            })
+          } else {
+            savePlayer(playerForm)
+            closeAlert()
+          }
+        }
+      },
+      {
+        label: 'Cancelar',
+        class: 'text-gray-600',
+        onclick: function () {
+          closeAlert()
+        }
+      }
+    ]
+  })
 }
 
 window.onload = function () {
@@ -137,10 +184,10 @@ window.onload = function () {
   if (length > 0) {
     loadPlayer(0)
     if (length === 6) {
-      document.getElementById('button-add-player').style.display = 'none'
+      MobileUI.hide('button-add-player')
     }
   } else {
-    document.getElementById('player-content').style.display = 'none'
-    document.getElementById('no-player-content').style.display = 'block'
+    MobileUI.hide('player-content')
+    MobileUI.hide('no-player-content')
   }
 }

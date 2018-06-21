@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="mobileui/fonts.css">
+  <link rel="stylesheet" type="text/css" href="mobileui/style.css">
+  <meta name="format-detection" content="telephone=no">
+  <meta charset="utf-8">
+  <meta name="msapplication-tap-highlight" content="no">
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <title>Pega Varetas</title>
+</head>
+
+<body>
+  <div class="content black-opacity-90" id="no-player-content">
+    <div class="row vertical-align-center align-center">
+      <div class="col">
+        <h3 class="font-titan">
+          <span class="text-yellow-300">P</span>
+          <span class="text-green-300">e</span>
+          <span class="text-blue-300">g</span>
+          <span class="text-red-300">a</span>
+          <br>
+          <span class="text-yellow-300">V</span>
+          <span class="text-green-300">a</span>
+          <span class="text-blue-300">r</span>
+          <span class="text-red-300">e</span>
+          <span class="text-yellow-300">t</span>
+          <span class="text-green-300">a</span>
+          <span class="text-blue-300">s</span>
+          <span class="text-red-300">!</span>
+        </h3>
+        <br>
+        <br>
+        <button class="icon-text icon-right green radius font-share big" onclick="addPlayer()">
+          <i class="icon ion-happy"></i>
+          Começar agora
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content grey-600" id="player-content">
+    <div class="padding white header-players">
+      <button class="icon ion-plus text-grey-600 right" id="button-add-player" onclick="addPlayer()"></button>
+      <button class="border-grey-600 text-grey-600 circle $$getPlayerClass{active}" onclick="loadPlayer($$index)" data='players'
+        id='player-$$index'>$$getPlayerFirstLetter{name}</button>
+    </div>
+    <div class="padding">
+      <div class="arrow-up" id="arrow-active-player"></div>
+      <div class="padding">
+        <button class="icon ion-edit text-white edit-player" onclick="editPlayer()"></button>
+        <h3 class="font-titan" id="player-total-points">0 pontos</h3>
+        <p class="font-share" id="player-name">Jogador</p>
+      </div>
+      <div class="row vertical-align-center padding ${backgroundColor} align-center" data="colors">
+        <div class="col">
+          <button class="icon ion-minus ${buttonColor} circle" onclick="removeItem('${id}')"></button>
+        </div>
+        <div class="col">
+          <h3 class="font-titan" id="player-qty-${id}">0</h3>
+          <p class="font-share">${title} (${points} pontos)</p>
+        </div>
+        <div class="col">
+          <button class="icon ion-plus ${buttonColor} circle" onclick="addItem('${id}')"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden" id="alert-playe
