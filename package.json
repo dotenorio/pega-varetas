@@ -1,14 +1,14 @@
 {
-    "name": "helloworld",
-    "displayName": "HelloCordova",
+    "name": "pegavaretas",
+    "displayName": "Pega Varetas",
     "version": "1.0.0",
-    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "description": "Um jeito divertido de contar seus pontos no pega varetas",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "Apache Cordova Team",
-    "license": "Apache-2.0",
+    "author": "Fernando Migliorini Tenório",
+    "license": "MIT",
     "dependencies": {
         "cordova-android": "^7.0.0",
         "cordova-plugin-whitelist": "^1.3.3"
