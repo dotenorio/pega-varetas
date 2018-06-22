@@ -1,3 +1,4 @@
+var playerIndexEditing = null
 var colors = [
   {
     id: 'yellow',
@@ -35,7 +36,6 @@ var colors = [
     points: 100
   }
 ]
-
 var players = []
 
 if (window.localStorage.getItem('players')) {
@@ -50,6 +50,15 @@ MobileUI.getPlayerClass = function (active) {
   return (active) ? 'player active-player' : 'player'
 }
 
+MobileUI.setWinner = function (winner) {
+  if (winner) return '<i class="icon ion-record"></i>'
+  return ''
+}
+
+MobileUI.setWinnerBox = function (winner) {
+  return winner ? 'winner' : ''
+}
+
 function save () {
   window.localStorage.setItem('players', JSON.stringify(players))
 }
@@ -61,9 +70,29 @@ function getColor (colorId) {
 }
 
 function getActivePlayer () {
-  return players.filter(function (player) {
+  return players.filter(function (player, i) {
+    player.index = i
     return player.active
   })[0]
+}
+
+function getWinner () {
+  var ranking = players.slice()
+  ranking.sort(function (a, b) {
+    if (a.totalPoints < b.totalPoints) { return -1 }
+    if (a.totalPoints > b.totalPoints) { return 1 }
+    return 0
+  })
+  ranking.reverse()
+
+  players = players.map(function (player) {
+    player.winner = false
+    return player
+  })
+
+  if (ranking[0].totalPoints > 0) {
+    players[ranking[0].index].winner = true
+  }
 }
 
 function setActive (index) {
@@ -89,6 +118,7 @@ function setTotal (player) {
     totalPoints += (qty * points)
   }
   document.getElementById('player-total-points').innerHTML = totalPoints + ' pontos'
+  player.totalPoints = totalPoints
   save()
 }
 
@@ -101,45 +131,58 @@ function loadPlayer (index) {
   }, 100)
 
   document.getElementById('player-name').innerHTML = player.name
+  if (player.winner) {
+    document.getElementById('player-name').innerHTML += ' - <span class="text-yellow"><i class="icon ion-record"></i> Ganhando </span>'
+  }
 }
 
 function removeItem (colorId) {
   var player = getActivePlayer()
   player.qty[colorId]--
   setTotal(player)
+  getWinner()
 }
 
 function addItem (colorId) {
   var player = getActivePlayer()
   player.qty[colorId]++
   setTotal(player)
+  getWinner()
 }
 
-function savePlayer (playerForm) {
+function savePlayer (nameElement) {
   MobileUI.show('player-content')
   MobileUI.hide('no-player-content')
 
-  players.push({
-    name: playerForm.name,
-    qty: {
-      yellow: 0,
-      green: 0,
-      blue: 0,
-      red: 0,
-      black: 0
-    },
-    active: true
-  })
+  if (playerIndexEditing !== null) {
+    players[playerIndexEditing].name = nameElement.value
+    loadPlayer(playerIndexEditing)
+  } else {
+    players.push({
+      name: nameElement.value,
+      qty: {
+        yellow: 0,
+        green: 0,
+        blue: 0,
+        red: 0,
+        black: 0
+      },
+      active: true
+    })
+    loadPlayer(players.length - 1)
+    if (players.length === 6) {
+      MobileUI.hide('button-add-player')
+    }
+  }
 
-  MobileUI.clearForm('player-form')
-
-  loadPlayer(players.length - 1)
+  nameElement.value = ''
+  playerIndexEditing = null
 }
 
-function addPlayer () {
-  MobileUI.hide('button-delete-player')
+function alertPlayer () {
   alert({
     title: 'Jogador',
+    id: 'alert-player-id',
     message: ' ',
     template: 'alert-player',
     buttons: [
@@ -147,10 +190,11 @@ function addPlayer () {
         label: 'Salvar',
         class: 'text-green',
         onclick: function () {
-          var playerForm = MobileUI.objectByForm('player-form')
-          if (!playerForm.name) {
+          var nameElement = document.querySelector('.alert-mobileui #player-form-name')
+          if (!nameElement.value) {
             alert({
-              message: 'Ei, você precisa dar um nome ao jogador.',
+              title: 'Oops',
+              message: 'Você precisa dar um nome ao jogador.',
               class: 'red',
               buttons: [
                 {
@@ -163,7 +207,7 @@ function addPlayer () {
               ]
             })
           } else {
-            savePlayer(playerForm)
+            savePlayer(nameElement)
             closeAlert()
           }
         }
@@ -179,6 +223,57 @@ function addPlayer () {
   })
 }
 
+function addPlayer () {
+  MobileUI.hide('button-delete-player')
+  alertPlayer()
+  playerIndexEditing = null
+}
+
+function editPlayer () {
+  MobileUI.show('button-delete-player')
+  var player = getActivePlayer()
+  alertPlayer()
+  var nameElement = document.querySelector('.alert-mobileui #player-form-name')
+  nameElement.value = player.name
+  playerIndexEditing = player.index
+}
+
+function removePlayer () {
+  alert({
+    title: 'Atenção',
+    message: 'Você tem certeza que quer remover este jogador?',
+    class: 'red',
+    buttons: [
+      {
+        label: 'Sim',
+        class: 'text-white',
+        onclick: function () {
+          var player = getActivePlayer()
+          players.splice(player.index, 1)
+          if (players.length < 6) {
+            MobileUI.show('button-add-player')
+          }
+          if (players.length === 0) {
+            MobileUI.hide('player-content')
+            MobileUI.show('no-player-content')
+          } else {
+            loadPlayer(0)
+          }
+          closeAlert('alert-player-id')
+          closeAlert()
+        }
+      },
+      {
+        label: 'Não',
+        class: 'text-white',
+        onclick: function () {
+          closeAlert()
+        }
+      }
+    ]
+  })
+}
+
 window.onload = function () {
   var length = players.length
   if (length > 0) {
@@ -186,8 +281,12 @@ window.onload = function () {
     if (length === 6) {
       MobileUI.hide('button-add-player')
     }
+    players.forEach(function (player) {
+      setTotal(player)
+    })
+    getWinner()
   } else {
     MobileUI.hide('player-content')
-    MobileUI.hide('no-player-content')
+    MobileUI.show('no-player-content')
   }
 }
