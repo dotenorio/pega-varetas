@@ -44,8 +44,12 @@
   <div class="content grey-600" id="player-content">
     <div class="padding white header-players">
       <button class="icon ion-plus text-grey-600 right" id="button-add-player" onclick="addPlayer()"></button>
-      <button class="border-grey-600 text-grey-600 circle $$getPlayerClass{active}" onclick="loadPlayer($$index)" data='players'
-        id='player-$$index'>$$getPlayerFirstLetter{name}</button>
+      <div class="$$setWinnerBox{winner} $$getPlayerClass{active}" data='players' style="display: inline-block">
+        <button class="border-grey-600 text-grey-600 circle" onclick="loadPlayer($$index)" id='player-$$index'>
+          $$getPlayerFirstLetter{name}
+        </button>
+        <div>$$setWinner{winner}</div>
+      </div>
     </div>
     <div class="padding">
       <div class="arrow-up" id="arrow-active-player"></div>
@@ -69,4 +73,20 @@
     </div>
   </div>
 
-  <div class="hidden" id="alert-playe
+  <div class="hidden" id="alert-player">
+    <div class="list">
+      <div class="item icon ion-person" id="player-form">
+        <input type="text" id="player-form-name" placeholder="nome (ex.: João)">
+        <div class="right" id="button-delete-player" onclick="removePlayer()">
+          <button class="text-red small radius icon ion-trash-b"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="cordova.js"></script>
+  <script type="text/javascript" src="mobileui/mobileui.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>

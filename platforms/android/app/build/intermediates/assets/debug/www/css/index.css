@@ -42,9 +42,40 @@ h3 {
 .player {
   margin: 0 3px;
 }
-.active-player {
+.active-player button {
   background-color: #757575!important;
   color: #FFF;
+}
+.winner button {
+  border: 2px solid #f9a825;
+  color: #f9a825;
+}
+#player-name .ion-record {
+  position: absolute;
+  margin-top: -8px;
+  left: 0;
+}
+#player-name {
+  padding-top: 10px;
+}
+#player-name span {
+  padding-left: 30px;
+  position: relative;
+}
+.active-player.winner button {
+  background-color: #f9a825!important;
+  color: #fff !important;
+}
+.player .ion-record {
+  position: absolute;
+  top: 0;
+  margin-left: 25px;
+  font-size: 23px;
+  color: #f9a825 !important;
+  z-index: 9999;
+}
+.active-player.winner i {
+  display: none;
 }
 .edit-player {
   position: absolute;
