@@ -70,6 +70,14 @@
           <button class="icon ion-plus ${buttonColor} circle" onclick="addItem('${id}')"></button>
         </div>
       </div>
+      <div class="row vertical-align-center padding ${backgroundColor} align-center" style="margin-top: 10px">
+        <div class="col">
+          <button class="icon-text icon-right border-white text-white radius font-share big" onclick="options()">
+            <i class="icon ion-gear-a"></i>
+            Opções
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -80,6 +88,17 @@
         <div class="right" id="button-delete-player" onclick="removePlayer()">
           <button class="text-red small radius icon ion-trash-b"></button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hidden" id="alert-options">
+    <div class="list" id="option-form">
+      <div class="item align-center">
+        <button class="text-green-600" onclick="restartPoints()">Reiniciar pontuação</button>
+      </div>
+      <div class="item align-center">
+        <button class="small text-red" onclick="removeAllPlayers()">Excluir todos os jogadores</button>
       </div>
     </div>
   </div>

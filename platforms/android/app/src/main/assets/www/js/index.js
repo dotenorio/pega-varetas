@@ -122,6 +122,13 @@ function setTotal (player) {
   save()
 }
 
+function setName (player) {
+  document.getElementById('player-name').innerHTML = player.name
+  if (player.winner) {
+    document.getElementById('player-name').innerHTML += ' - <span class="text-yellow"><i class="icon ion-record"></i> Ganhando </span>'
+  }
+}
+
 function loadPlayer (index) {
   var player = players[index]
 
@@ -130,10 +137,7 @@ function loadPlayer (index) {
     setTotal(player)
   }, 100)
 
-  document.getElementById('player-name').innerHTML = player.name
-  if (player.winner) {
-    document.getElementById('player-name').innerHTML += ' - <span class="text-yellow"><i class="icon ion-record"></i> Ganhando </span>'
-  }
+  setName(player)
 }
 
 function removeItem (colorId) {
@@ -141,6 +145,7 @@ function removeItem (colorId) {
   player.qty[colorId]--
   setTotal(player)
   getWinner()
+  setName(player)
 }
 
 function addItem (colorId) {
@@ -148,6 +153,7 @@ function addItem (colorId) {
   player.qty[colorId]++
   setTotal(player)
   getWinner()
+  setName(player)
 }
 
 function savePlayer (nameElement) {
@@ -221,6 +227,7 @@ function alertPlayer () {
       }
     ]
   })
+  document.querySelector('.alert-mobileui #player-form-name').focus()
 }
 
 function addPlayer () {
@@ -272,6 +279,47 @@ function removePlayer () {
       }
     ]
   })
+}
+
+function options () {
+  alert({
+    id: 'alert-options-id',
+    title: 'Opções',
+    message: ' ',
+    template: 'alert-options',
+    buttons: [
+      {
+        label: 'OK',
+        class: 'text-gray-600',
+        onclick: function () {
+          closeAlert()
+        }
+      }
+    ]
+  })
+}
+
+function restartPoints () {
+  players = players.map(function (player) {
+    player.qty = {
+      yellow: 0,
+      green: 0,
+      blue: 0,
+      red: 0,
+      black: 0
+    }
+    return player
+  })
+  loadPlayer(0)
+  closeAlert('alert-options-id')
+}
+
+function removeAllPlayers () {
+  players = []
+  window.localStorage.removeItem('players')
+  MobileUI.hide('player-content')
+  MobileUI.show('no-player-content')
+  closeAlert('alert-options-id')
 }
 
 window.onload = function () {

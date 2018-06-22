@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Jun 22 13:13:12 BRT 2018
+#Fri Jun 22 15:31:11 BRT 2018
 25.file=C\:\\Desenvolvimento\\Dotenorio\\pega-varetas\\platforms\\android\\app\\build\\intermediates\\res\\debug\\resources-debug.ap_\\res\\mipmap-ldpi-v4\\icon.png
 41.base=C\:\\Desenvolvimento\\Dotenorio\\pega-varetas\\platforms\\android\\app\\build\\intermediates\\res\\debug\\resources-debug.ap_
 25.base=C\:\\Desenvolvimento\\Dotenorio\\pega-varetas\\platforms\\android\\app\\build\\intermediates\\res\\debug\\resources-debug.ap_
