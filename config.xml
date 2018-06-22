@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.cordova.hellocordova" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>HelloCordova</name>
+<widget id="io.github.dotenorio.pegavaretas" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Pega Varetas</name>
     <description>
-        A sample Apache Cordova application that responds to the deviceready event.
+        Um jeito divertido de contar seus pontos no pega varetas
     </description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+    <author email="dotenorio@gmail.com" href="https://dotenorio.github.io">
+        Fernando Migliorini Tenório
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
