@@ -308,6 +308,7 @@ function restartPoints () {
       red: 0,
       black: 0
     }
+    player.winner = false
     return player
   })
   loadPlayer(0)
