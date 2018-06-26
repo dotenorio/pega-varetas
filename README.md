@@ -9,7 +9,7 @@ Dia desses jogando Pega Varetas com meu filho de 5 anos, ele resolveu considerar
 
 ## Co-autores
 
-- [Fábio Rogério SJ](https://github.com/fabiorogeriosj) - Criador do [MobileUI](https://github.com/MobileUI/mobileui) e responsável pelo belíssimo design e logo do aplicativo. Sem dúvida o maior incentivador dessa brincadeira.
+- [Fábio Rogério SJ](https://github.com/fabiorogeriosj) - Criador do [MobileUI](https://mobileui.github.io/) e responsável pelo belíssimo design e logo do aplicativo. Sem dúvida o maior incentivador dessa brincadeira.
 - [Vinícius Rufine](https://github.com/vrufine) - Grande entusiasta do projeto, ajudou demais com seus feedbacks pontuais, testes e conhecimentos. Ver seu cara de satisfação a cada versão do aplicativo foi uma grande motivação.
 
 ## MobileUI
