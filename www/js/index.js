@@ -140,7 +140,7 @@ function loadPlayer (index) {
   setName(player)
 }
 
-function removeItem (colorId) {
+function removeItem (colorId) { // eslint-disable-line
   var player = getActivePlayer()
   player.qty[colorId]--
   setTotal(player)
@@ -148,7 +148,7 @@ function removeItem (colorId) {
   setName(player)
 }
 
-function addItem (colorId) {
+function addItem (colorId) { // eslint-disable-line
   var player = getActivePlayer()
   player.qty[colorId]++
   setTotal(player)
@@ -230,13 +230,13 @@ function alertPlayer () {
   document.querySelector('.alert-mobileui #player-form-name').focus()
 }
 
-function addPlayer () {
+function addPlayer () { // eslint-disable-line
   MobileUI.hide('button-delete-player')
   alertPlayer()
   playerIndexEditing = null
 }
 
-function editPlayer () {
+function editPlayer () { // eslint-disable-line
   MobileUI.show('button-delete-player')
   var player = getActivePlayer()
   alertPlayer()
@@ -245,7 +245,7 @@ function editPlayer () {
   playerIndexEditing = player.index
 }
 
-function removePlayer () {
+function removePlayer () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer remover este jogador?',
@@ -281,7 +281,7 @@ function removePlayer () {
   })
 }
 
-function options () {
+function options () { // eslint-disable-line
   alert({
     id: 'alert-options-id',
     title: 'Opções',
@@ -299,7 +299,7 @@ function options () {
   })
 }
 
-function restartPoints () {
+function restartPoints () { // eslint-disable-line
   players = players.map(function (player) {
     player.qty = {
       yellow: 0,
@@ -315,7 +315,7 @@ function restartPoints () {
   closeAlert('alert-options-id')
 }
 
-function removeAllPlayers () {
+function removeAllPlayers () { // eslint-disable-line
   players = []
   window.localStorage.removeItem('players')
   MobileUI.hide('player-content')

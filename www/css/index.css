@@ -1,12 +1,16 @@
+a {
+  color: #3f51b5;
+  text-decoration: underline;
+}
+h3 {
+  font-size: 40px;
+  font-weight: normal;
+}
 .font-titan {
   font-family: 'Titan One', cursive;
 }
 .font-share {
   font-family: 'Share', cursive;
-}
-h3 {
-  font-size: 40px;
-  font-weight: normal;
 }
 .header-players {
   padding-top: 15px;
@@ -88,4 +92,42 @@ h3 {
 }
 #no-player-content .row {
   height: 100%;
+}
+.justify {
+  text-align: justify
+}
+.table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.table tr td,
+.table tr th {
+  border: 1px solid #757575;
+  padding: 5px;
+}
+.table tr th {
+  background-color: #e0e0e0
+}
+.content-rules .padding {
+  padding: 20px;
+}
+.content-rules p {
+  margin-bottom: 20px;
+}
+.content-rules p.small {
+  font-size: 12px;
+  font-style: italic;
+  color: #757575;
+  margin-bottom: 0;
+}
+.see-more {
+  margin-top: 20px;
+}
+.see-more b {
+  display: block;
+  margin-bottom: 10px;
+}
+.see-more a {
+  display: block;
+  margin-bottom: 5px;
 }
