@@ -120,6 +120,9 @@ h3 {
   color: #757575;
   margin-bottom: 0;
 }
+.content-rules p.source {
+  margin-top: 20px;
+}
 .see-more {
   margin-top: 20px;
 }
