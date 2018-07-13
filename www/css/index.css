@@ -6,6 +6,9 @@ h3 {
   font-size: 40px;
   font-weight: normal;
 }
+a {
+  text-decoration: none;
+}
 .font-titan {
   font-family: 'Titan One', cursive;
 }

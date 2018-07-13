@@ -43,7 +43,7 @@
 
   <div class="content grey-600" id="player-content">
     <div class="padding white header-players">
-      <button class="icon ion-plus text-grey-600 right" id="button-add-player" onclick="addPlayer()"></button>
+      <button class="icon ion-navicon-round text-grey-600 right" onclick="openMenu('menu')"></button>
       <div class="$$setWinnerBox{winner} $$getPlayerClass{active}" data='players' style="display: inline-block">
         <button class="border-grey-600 text-grey-600 circle" onclick="loadPlayer($$index)" id='player-$$index'>
           $$getPlayerFirstLetter{name}
@@ -70,14 +70,52 @@
           <button class="icon ion-plus ${buttonColor} circle" onclick="addItem('${id}')"></button>
         </div>
       </div>
-      <div class="row vertical-align-center padding ${backgroundColor} align-center" style="margin-top: 10px">
-        <div class="col">
-          <button class="icon-text icon-right border-white text-white radius font-share big" onclick="options()">
-            <i class="icon ion-gear-a"></i>
-            Opções
-          </button>
-        </div>
+    </div>
+  </div>
+
+  <div class="menu menu-right white" id="menu">
+    <div class="list no-border">
+      <div class="item black">
+        <h1 class="text-white font-titan">
+          <span class="text-yellow-300">P</span>
+          <span class="text-green-300">e</span>
+          <span class="text-blue-300">g</span>
+          <span class="text-red-300">a</span>
+          &nbsp;&nbsp;
+          <span class="text-yellow-300">V</span>
+          <span class="text-green-300">a</span>
+          <span class="text-blue-300">r</span>
+          <span class="text-red-300">e</span>
+          <span class="text-yellow-300">t</span>
+          <span class="text-green-300">a</span>
+          <span class="text-blue-300">s</span>
+          <span class="text-red-300">!</span>
+        </h1>
       </div>
+      <a class="item" onclick="addPlayer()">
+        <div class="left">
+          <i class="icon ion-plus grey-600"></i>
+        </div>
+        <h1 class="text-grey-600">Jogador</h1>
+      </a>
+      <a class="item" onclick="restartPoints()">
+        <div class="left">
+          <i class="icon ion-refresh grey-600"></i>
+        </div>
+        <h1 class="text-grey-600">Reiniciar pontuação</h1>
+      </a>
+      <a class="item" onclick="removeAllPlayers()">
+        <div class="left">
+          <i class="icon ion-close-round grey-600"></i>
+        </div>
+        <h1 class="text-grey-600">Excluir todos os jogadores</h1>
+      </a>
+      <a class="item" onclick="openPage('views/rules')">
+        <div class="left">
+          <i class="icon ion-ios-list-outline grey-600"></i>
+        </div>
+        <h1 class="text-grey-600">Regras</h1>
+      </a>
     </div>
   </div>
 
@@ -88,20 +126,6 @@
         <div class="right" id="button-delete-player" onclick="removePlayer()">
           <button class="text-red small radius icon ion-trash-b"></button>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hidden" id="alert-options">
-    <div class="list" id="option-form">
-      <div class="item align-center">
-        <button class="text-green-600" onclick="restartPoints()">Reiniciar pontuação</button>
-      </div>
-      <div class="item align-center">
-        <button class="small text-red" onclick="removeAllPlayers()">Excluir todos os jogadores</button>
-      </div>
-      <div class="item align-center">
-        <button class="text-green-600" onclick="openPage('views/rules')">Regras</button>
       </div>
     </div>
   </div>

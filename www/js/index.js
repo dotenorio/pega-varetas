@@ -43,7 +43,7 @@ if (window.localStorage.getItem('players')) {
 }
 
 MobileUI.getPlayerFirstLetter = function (name) {
-  return name[0].toUpperCase()
+  return name[0].toUpperCase() + name[1].toLowerCase()
 }
 
 MobileUI.getPlayerClass = function (active) {
@@ -234,6 +234,7 @@ function addPlayer () { // eslint-disable-line
   MobileUI.hide('button-delete-player')
   alertPlayer()
   playerIndexEditing = null
+  closeMenu('menu')
 }
 
 function editPlayer () { // eslint-disable-line
@@ -281,24 +282,6 @@ function removePlayer () { // eslint-disable-line
   })
 }
 
-function options () { // eslint-disable-line
-  alert({
-    id: 'alert-options-id',
-    title: 'Opções',
-    message: ' ',
-    template: 'alert-options',
-    buttons: [
-      {
-        label: 'OK',
-        class: 'text-gray-600',
-        onclick: function () {
-          closeAlert()
-        }
-      }
-    ]
-  })
-}
-
 function restartPoints () { // eslint-disable-line
   players = players.map(function (player) {
     player.qty = {
@@ -312,7 +295,7 @@ function restartPoints () { // eslint-disable-line
     return player
   })
   loadPlayer(0)
-  closeAlert('alert-options-id')
+  closeMenu('menu')
 }
 
 function removeAllPlayers () { // eslint-disable-line
@@ -320,7 +303,7 @@ function removeAllPlayers () { // eslint-disable-line
   window.localStorage.removeItem('players')
   MobileUI.hide('player-content')
   MobileUI.show('no-player-content')
-  closeAlert('alert-options-id')
+  closeMenu('menu')
 }
 
 window.onload = function () {
