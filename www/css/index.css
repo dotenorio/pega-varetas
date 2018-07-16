@@ -80,7 +80,6 @@ a {
   margin-left: 25px;
   font-size: 23px;
   color: #f9a825 !important;
-  z-index: 9999;
 }
 .active-player.winner i {
   display: none;
