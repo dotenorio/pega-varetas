@@ -43,7 +43,17 @@ if (window.localStorage.getItem('players')) {
 }
 
 MobileUI.getPlayerFirstLetter = function (name) {
-  return name[0].toUpperCase() + name[1].toLowerCase()
+  var user = ''
+
+  if (name[0]) {
+    user += name[0].toUpperCase()
+  }
+
+  if (name[1]) {
+    user += name[1].toLowerCase()
+  }
+
+  return user
 }
 
 MobileUI.getPlayerClass = function (active) {
@@ -176,9 +186,6 @@ function savePlayer (nameElement) {
       active: true
     })
     loadPlayer(players.length - 1)
-    if (players.length === 6) {
-      MobileUI.hide('button-add-player')
-    }
   }
 
   nameElement.value = ''
@@ -231,10 +238,27 @@ function alertPlayer () {
 }
 
 function addPlayer () { // eslint-disable-line
-  MobileUI.hide('button-delete-player')
-  alertPlayer()
-  playerIndexEditing = null
   closeMenu('menu')
+  if (players.length === 6) {
+    alert({
+      title: 'Atenção',
+      message: 'Já temos 6 jogadores!',
+      class: 'indigo',
+      buttons: [
+        {
+          label: 'Ok',
+          class: 'text-white',
+          onclick: function () {
+            closeAlert()
+          }
+        }
+      ]
+    })
+  } else {
+    MobileUI.hide('button-delete-player')
+    alertPlayer()
+    playerIndexEditing = null
+  }
 }
 
 function editPlayer () { // eslint-disable-line
@@ -258,9 +282,6 @@ function removePlayer () { // eslint-disable-line
         onclick: function () {
           var player = getActivePlayer()
           players.splice(player.index, 1)
-          if (players.length < 6) {
-            MobileUI.show('button-add-player')
-          }
           if (players.length === 0) {
             MobileUI.hide('player-content')
             MobileUI.show('no-player-content')
@@ -283,26 +304,68 @@ function removePlayer () { // eslint-disable-line
 }
 
 function restartPoints () { // eslint-disable-line
-  players = players.map(function (player) {
-    player.qty = {
-      yellow: 0,
-      green: 0,
-      blue: 0,
-      red: 0,
-      black: 0
-    }
-    player.winner = false
-    return player
+  alert({
+    title: 'Atenção',
+    message: 'Você tem certeza que quer reiniciar a pontuação?',
+    class: 'red',
+    buttons: [
+      {
+        label: 'Sim',
+        class: 'text-white',
+        onclick: function () {
+          players = players.map(function (player) {
+            player.qty = {
+              yellow: 0,
+              green: 0,
+              blue: 0,
+              red: 0,
+              black: 0
+            }
+            player.winner = false
+            return player
+          })
+          loadPlayer(0)
+          closeAlert()
+        }
+      },
+      {
+        label: 'Não',
+        class: 'text-white',
+        onclick: function () {
+          closeAlert()
+        }
+      }
+    ]
   })
-  loadPlayer(0)
   closeMenu('menu')
 }
 
 function removeAllPlayers () { // eslint-disable-line
-  players = []
-  window.localStorage.removeItem('players')
-  MobileUI.hide('player-content')
-  MobileUI.show('no-player-content')
+  alert({
+    title: 'Atenção',
+    message: 'Você tem certeza que quer excluir todos os jogadores?',
+    class: 'red',
+    buttons: [
+      {
+        label: 'Sim',
+        class: 'text-white',
+        onclick: function () {
+          players = []
+          window.localStorage.removeItem('players')
+          MobileUI.hide('player-content')
+          MobileUI.show('no-player-content')
+          closeAlert()
+        }
+      },
+      {
+        label: 'Não',
+        class: 'text-white',
+        onclick: function () {
+          closeAlert()
+        }
+      }
+    ]
+  })
   closeMenu('menu')
 }
 
@@ -310,9 +373,6 @@ window.onload = function () {
   var length = players.length
   if (length > 0) {
     loadPlayer(0)
-    if (length === 6) {
-      MobileUI.hide('button-add-player')
-    }
     players.forEach(function (player) {
       setTotal(player)
     })
