@@ -166,9 +166,26 @@ function addItem (colorId) { // eslint-disable-line
   setName(player)
 }
 
-function savePlayer (nameElement) {
-  MobileUI.show('player-content')
+function noPlayerContent () {
+  MobileUI.hide('player-content')
+  MobileUI.hide('first-players-content')
+  MobileUI.show('no-player-content')
+}
+
+function firstPlayers () { // eslint-disable-line
+  MobileUI.hide('player-content')
+  MobileUI.show('first-players-content')
   MobileUI.hide('no-player-content')
+}
+
+function playerContent () {
+  MobileUI.show('player-content')
+  MobileUI.hide('first-players-content')
+  MobileUI.hide('no-player-content')
+}
+
+function savePlayer (nameElement) {
+  playerContent()
 
   if (playerIndexEditing !== null) {
     players[playerIndexEditing].name = nameElement.value
@@ -283,8 +300,7 @@ function removePlayer () { // eslint-disable-line
           var player = getActivePlayer()
           players.splice(player.index, 1)
           if (players.length === 0) {
-            MobileUI.hide('player-content')
-            MobileUI.show('no-player-content')
+            noPlayerContent()
           } else {
             loadPlayer(0)
           }
@@ -352,8 +368,7 @@ function removeAllPlayers () { // eslint-disable-line
         onclick: function () {
           players = []
           window.localStorage.removeItem('players')
-          MobileUI.hide('player-content')
-          MobileUI.show('no-player-content')
+          noPlayerContent()
           closeAlert()
         }
       },
@@ -378,7 +393,6 @@ window.onload = function () {
     })
     getWinner()
   } else {
-    MobileUI.hide('player-content')
-    MobileUI.show('no-player-content')
+    noPlayerContent()
   }
 }

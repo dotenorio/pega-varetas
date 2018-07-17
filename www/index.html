@@ -14,28 +14,41 @@
 
 <body>
   <div class="content black-opacity-90" id="no-player-content">
-    <div class="row vertical-align-center align-center">
+    <div class="row vertical-align-center align-center full-height">
       <div class="col">
-        <h3 class="font-titan">
-          <span class="text-yellow-300">P</span>
-          <span class="text-green-300">e</span>
-          <span class="text-blue-300">g</span>
-          <span class="text-red-300">a</span>
-          <br>
-          <span class="text-yellow-300">V</span>
-          <span class="text-green-300">a</span>
-          <span class="text-blue-300">r</span>
-          <span class="text-red-300">e</span>
-          <span class="text-yellow-300">t</span>
-          <span class="text-green-300">a</span>
-          <span class="text-blue-300">s</span>
-          <span class="text-red-300">!</span>
-        </h3>
+        <h3 include="views/logo"></h3>
         <br>
         <br>
-        <button class="icon-text icon-right green radius font-share big" onclick="addPlayer()">
-          <i class="icon ion-happy"></i>
-          Começar agora
+        <button class="green radius font-share big" onclick="firstPlayers()" style="width: 200px;">
+          Cadastrar jogadores
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="content black-opacity-90" id="first-players-content">
+    <div class="row vertical-align-center align-center full-height">
+      <div class="col">
+        <h3 include="views/logo"></h3>
+        <br>
+
+        <div id="input-players" class="padding">
+          <input type="text" placeholder="Jogador 1">
+          <input type="text" placeholder="Jogador 2">
+          <input type="text" placeholder="Jogador 3">
+          <input type="text" placeholder="Jogador 4">
+          <input type="text" placeholder="Jogador 5">
+        </div>
+        <button class="text-blue-300 font-share full align-right link-add-right">
+          Adicionar jogador
+        </button>
+
+        <br>
+        <button class="green radius font-share big" onclick="playerContent()" style="width: 200px;">
+          Jogar
+        </button>
+        <button class="text-grey-300 font-share full" onclick="openPage('views/config')">
+          Configurar jogo
         </button>
       </div>
     </div>
@@ -76,21 +89,7 @@
   <div class="menu menu-right white" id="menu">
     <div class="list no-border">
       <div class="item black-opacity-90">
-        <h1 class="text-white font-titan">
-          <span class="text-yellow-300">P</span>
-          <span class="text-green-300">e</span>
-          <span class="text-blue-300">g</span>
-          <span class="text-red-300">a</span>
-          &nbsp;&nbsp;
-          <span class="text-yellow-300">V</span>
-          <span class="text-green-300">a</span>
-          <span class="text-blue-300">r</span>
-          <span class="text-red-300">e</span>
-          <span class="text-yellow-300">t</span>
-          <span class="text-green-300">a</span>
-          <span class="text-blue-300">s</span>
-          <span class="text-red-300">!</span>
-        </h1>
+        <h1 include="views/logo" class="align-center"></h1>
       </div>
       <a class="item" onclick="addPlayer()">
         <div class="left">
