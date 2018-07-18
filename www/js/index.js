@@ -384,6 +384,47 @@ function removeAllPlayers () { // eslint-disable-line
   closeMenu('menu')
 }
 
+function addPlayerInput () { // eslint-disable-line
+  var inputPlayersCount = document.querySelectorAll('#input-players input').length
+
+  if (inputPlayersCount === 6) return
+  if (inputPlayersCount === 5) {
+    MobileUI.hide('add-player-input')
+  }
+
+  var inputPlayers = document.getElementById('input-players')
+  var div = document.createElement('div')
+  var button = document.createElement('button')
+  var input = document.createElement('input')
+
+  button.className = 'text-red icon ion-trash-b'
+  button.onclick = function () {
+    removePlayerInput(this)
+  }
+
+  input.type = 'text'
+  input.placeholder = 'Jogador ' + (inputPlayersCount + 1)
+
+  div.appendChild(button)
+  div.appendChild(input)
+  inputPlayers.appendChild(div)
+}
+
+function removePlayerInput (el) {
+  var parent = el.parentElement
+  parent.parentNode.removeChild(parent)
+
+  var inputPlayers = document.querySelectorAll('#input-players input')
+
+  inputPlayers.forEach(function (input, i) {
+    input.placeholder = 'Jogador ' + (i + 1)
+  })
+
+  if (inputPlayers.length < 6) {
+    MobileUI.show('add-player-input')
+  }
+}
+
 window.onload = function () {
   var length = players.length
   if (length > 0) {

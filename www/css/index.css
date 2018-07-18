@@ -176,12 +176,22 @@ a {
   padding: 10px;
 }
 
-#input-players input {
+#input-players div {
+  position: relative;
+}
+
+#input-players div input {
   background-color: #FFF;
   font-size: 18px;
   border-radius: 4px;
   padding: 10px;
   margin: 2px 0;
+}
+
+#input-players div button {
+  position: absolute;
+  right: 0;
+  top: 2px;
 }
 
 #input-players input:last-child {

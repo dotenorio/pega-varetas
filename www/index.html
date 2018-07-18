@@ -8,6 +8,7 @@
   <meta charset="utf-8">
   <meta name="msapplication-tap-highlight" content="no">
   <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+  <link rel="icon" type="image/png" href="img/icon.png" />
   <link rel="stylesheet" type="text/css" href="css/index.css">
   <title>Pega Varetas</title>
 </head>
@@ -33,13 +34,14 @@
         <br>
 
         <div id="input-players" class="padding">
-          <input type="text" placeholder="Jogador 1">
-          <input type="text" placeholder="Jogador 2">
-          <input type="text" placeholder="Jogador 3">
-          <input type="text" placeholder="Jogador 4">
-          <input type="text" placeholder="Jogador 5">
+          <div>
+            <input type="text" placeholder="Jogador 1">
+          </div>
+          <div>
+            <input type="text" placeholder="Jogador 2">
+          </div>
         </div>
-        <button class="text-blue-300 font-share full align-right link-add-right">
+        <button class="text-blue-300 font-share full align-right link-add-right" id="add-player-input" onclick="addPlayerInput()">
           Adicionar jogador
         </button>
 
