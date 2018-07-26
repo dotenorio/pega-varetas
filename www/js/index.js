@@ -150,7 +150,7 @@ function loadPlayer (index) {
   setName(player)
 }
 
-function removeItem (colorId) { // eslint-disable-line
+function removeItem(colorId) { // eslint-disable-line
   var player = getActivePlayer()
   player.qty[colorId]--
   setTotal(player)
@@ -158,7 +158,7 @@ function removeItem (colorId) { // eslint-disable-line
   setName(player)
 }
 
-function addItem (colorId) { // eslint-disable-line
+function addItem(colorId) { // eslint-disable-line
   var player = getActivePlayer()
   player.qty[colorId]++
   setTotal(player)
@@ -172,10 +172,16 @@ function noPlayerContent () {
   MobileUI.show('no-player-content')
 }
 
-function firstPlayers () { // eslint-disable-line
+function firstPlayers() { // eslint-disable-line
   MobileUI.hide('player-content')
   MobileUI.show('first-players-content')
   MobileUI.hide('no-player-content')
+  var divs = document.querySelectorAll('#input-players div')
+  divs.forEach(function (div, i) {
+    if (i > 1) {
+      div.parentNode.removeChild(div)
+    }
+  })
 }
 
 function playerContent () {
@@ -184,8 +190,16 @@ function playerContent () {
   MobileUI.hide('no-player-content')
 }
 
-function savePlayer (nameElement) {
-  playerContent()
+function savePlayer (nameElement, options) {
+  if (!options) {
+    options = {}
+  }
+  if (options.loadAfter === undefined) {
+    options.loadAfter = true
+  }
+  if (options.active === undefined) {
+    options.active = true
+  }
 
   if (playerIndexEditing !== null) {
     players[playerIndexEditing].name = nameElement.value
@@ -200,13 +214,17 @@ function savePlayer (nameElement) {
         red: 0,
         black: 0
       },
-      active: true
+      active: options.active
     })
-    loadPlayer(players.length - 1)
+
+    if (options.loadAfter) {
+      loadPlayer(players.length - 1)
+    }
   }
 
   nameElement.value = ''
   playerIndexEditing = null
+  playerContent()
 }
 
 function alertPlayer () {
@@ -254,7 +272,7 @@ function alertPlayer () {
   document.querySelector('.alert-mobileui #player-form-name').focus()
 }
 
-function addPlayer () { // eslint-disable-line
+function addPlayer() { // eslint-disable-line
   closeMenu('menu')
   if (players.length === 6) {
     alert({
@@ -278,7 +296,46 @@ function addPlayer () { // eslint-disable-line
   }
 }
 
-function editPlayer () { // eslint-disable-line
+function addManyPlayers() { // eslint-disable-line
+  var inputs = document.querySelectorAll('#input-players input')
+  var newPlayers = []
+
+  inputs.forEach(function (input) {
+    if (input.value) {
+      newPlayers.push(input)
+    }
+  })
+
+  if (newPlayers.length < 2) {
+    return alert({
+      title: 'Atenção',
+      message: 'Precisamos de pelo menos 2 jogadores!',
+      class: 'red',
+      buttons: [
+        {
+          label: 'Ok',
+          class: 'text-white',
+          onclick: function () {
+            closeAlert()
+          }
+        }
+      ]
+    })
+  }
+
+  newPlayers.forEach(function (player, i) {
+    var active = false
+    if (i === 1) {
+      active = true
+    }
+    savePlayer(player, {
+      loadAfter: false,
+      active: active
+    })
+  })
+}
+
+function editPlayer() { // eslint-disable-line
   MobileUI.show('button-delete-player')
   var player = getActivePlayer()
   alertPlayer()
@@ -287,7 +344,7 @@ function editPlayer () { // eslint-disable-line
   playerIndexEditing = player.index
 }
 
-function removePlayer () { // eslint-disable-line
+function removePlayer() { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer remover este jogador?',
@@ -319,7 +376,7 @@ function removePlayer () { // eslint-disable-line
   })
 }
 
-function restartPoints () { // eslint-disable-line
+function restartPoints() { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer reiniciar a pontuação?',
@@ -356,7 +413,7 @@ function restartPoints () { // eslint-disable-line
   closeMenu('menu')
 }
 
-function removeAllPlayers () { // eslint-disable-line
+function removeAllPlayers() { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer excluir todos os jogadores?',
@@ -384,7 +441,7 @@ function removeAllPlayers () { // eslint-disable-line
   closeMenu('menu')
 }
 
-function addPlayerInput () { // eslint-disable-line
+function addPlayerInput() { // eslint-disable-line
   var inputPlayersCount = document.querySelectorAll('#input-players input').length
 
   if (inputPlayersCount === 6) return

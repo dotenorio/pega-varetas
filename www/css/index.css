@@ -204,3 +204,9 @@ a {
   margin-bottom: 20px;
   font-size: 14px;
 }
+
+#player-content,
+#first-players-content,
+#no-player-content {
+  display: none;
+}
