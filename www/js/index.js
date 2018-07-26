@@ -40,6 +40,9 @@ var players = []
 
 if (window.localStorage.getItem('players')) {
   players = JSON.parse(window.localStorage.getItem('players'))
+  if (players.length > 0) {
+    playerContent()
+  }
 }
 
 MobileUI.getPlayerFirstLetter = function (name) {
@@ -333,6 +336,8 @@ function addManyPlayers() { // eslint-disable-line
       active: active
     })
   })
+
+  save()
 }
 
 function editPlayer() { // eslint-disable-line
