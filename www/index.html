@@ -70,12 +70,12 @@
     </div>
     <div class="padding">
       <div class="arrow-up" id="arrow-active-player"></div>
-      <div class="padding">
-        <button class="icon ion-edit text-white edit-player" onclick="editPlayer()"></button>
+      <div class="padding" style="padding-top: 0">
+        <button class="icon ion-edit edit-player text-grey-400" onclick="editPlayer()"></button>
         <h3 class="font-titan" id="player-total-points">0 pontos</h3>
         <p class="font-share" id="player-name">Jogador</p>
       </div>
-      <div class="row vertical-align-center padding ${backgroundColor} align-center" data="colors">
+      <div class="row vertical-align-center ${backgroundColor} align-center row-color" data="colors">
         <div class="col">
           <button class="icon ion-minus ${buttonColor} circle" onclick="removeItem('${id}')"></button>
         </div>

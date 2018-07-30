@@ -109,7 +109,7 @@ a {
 .edit-player {
   position: absolute;
   right: 10px;
-  top: 105px;
+  top: 95px;
 }
 
 #no-player-content {
@@ -209,4 +209,12 @@ a {
 #first-players-content,
 #no-player-content {
   display: none;
+}
+
+.row-color {
+  padding: 9px 10px;
+}
+
+.menu .list .item h1:first-child {
+  margin-top: 0;
 }
