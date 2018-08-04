@@ -212,8 +212,8 @@ a {
 }
 
 .coloxbox {
-  width: 96vw;
-  left: 2vw;
+  width: calc(100vw - 20px);
+  left: 10px;
   height: calc(100vh - 193px);
   position: absolute;
 }
