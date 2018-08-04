@@ -75,16 +75,18 @@
         <h3 class="font-titan" id="player-total-points">0 pontos</h3>
         <p class="font-share" id="player-name">Jogador</p>
       </div>
-      <div class="row vertical-align-center ${backgroundColor} align-center row-color" data="colors">
-        <div class="col">
-          <button class="icon ion-minus ${buttonColor} circle" onclick="removeItem('${id}')"></button>
-        </div>
-        <div class="col">
-          <h3 class="font-titan" id="player-qty-${id}">0</h3>
-          <p class="font-share">${title} (${points} pontos)</p>
-        </div>
-        <div class="col">
-          <button class="icon ion-plus ${buttonColor} circle" onclick="addItem('${id}')"></button>
+      <div class="coloxbox">
+        <div class="row vertical-align-center ${backgroundColor} align-center row-color" data="colors">
+          <div class="col">
+            <button class="icon ion-minus ${buttonColor} circle" onclick="removeItem('${id}')"></button>
+          </div>
+          <div class="col">
+            <h3 class="font-titan" id="player-qty-${id}">0</h3>
+            <p class="font-share">${title} (${points} pontos)</p>
+          </div>
+          <div class="col">
+            <button class="icon ion-plus ${buttonColor} circle" onclick="addItem('${id}')"></button>
+          </div>
         </div>
       </div>
     </div>

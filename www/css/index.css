@@ -211,8 +211,15 @@ a {
   display: none;
 }
 
+.coloxbox {
+  width: 96vw;
+  left: 2vw;
+  height: calc(100vh - 193px);
+  position: absolute;
+}
+
 .row-color {
-  padding: 9px 10px;
+  height: 20%;
 }
 
 .menu .list .item h1:first-child {
