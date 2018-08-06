@@ -6,7 +6,7 @@ var colors = [
     backgroundColor: 'yellow-300',
     buttonColor: 'yellow-800',
     points: 5,
-    qty: 12
+    qty: 14
   },
   {
     id: 'green',
@@ -30,7 +30,7 @@ var colors = [
     backgroundColor: 'red-300',
     buttonColor: 'red-800',
     points: 50,
-    qty: 12
+    qty: 14
   },
   {
     id: 'black',
@@ -174,13 +174,29 @@ function addItem(colorId) { // eslint-disable-line
   setName(player)
 }
 
+function changeStatusBar (hex, retry) {
+  if (!retry) retry = 0
+  if (retry === 5) return
+  try {
+    if (cordova.platformId === 'android') {
+      StatusBar.backgroundColorByHexString(hex)
+    }
+  } catch (err) {
+    return setTimeout(function () {
+      changeStatusBar(hex, ++retry)
+    }, 500)
+  }
+}
+
 function noPlayerContent () {
+  changeStatusBar('#191919')
   MobileUI.hide('player-content')
   MobileUI.hide('first-players-content')
   MobileUI.show('no-player-content')
 }
 
 function firstPlayers() { // eslint-disable-line
+  changeStatusBar('#191919')
   MobileUI.hide('player-content')
   MobileUI.show('first-players-content')
   MobileUI.hide('no-player-content')
@@ -193,6 +209,7 @@ function firstPlayers() { // eslint-disable-line
 }
 
 function playerContent () {
+  changeStatusBar('#757575')
   MobileUI.show('player-content')
   MobileUI.hide('first-players-content')
   MobileUI.hide('no-player-content')

@@ -10,7 +10,7 @@
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="Orientation" value="portrait" />
-    <preference name="StatusBarBackgroundColor" value="#757575" />
+    <preference name="StatusBarBackgroundColor" value="#191919" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -29,4 +29,5 @@
     <plugin name="cordova-plugin-whitelist" spec="1" />
     <plugin name="cordova-plugin-statusbar" spec="^2.4.2" />
     <engine name="android" spec="^7.1.0" />
+    <engine name="browser" spec="^5.0.3" />
 </widget>

@@ -35,23 +35,28 @@
 
         <p class="text-white">Digite o nome dos jogadores</p>
 
-        <div id="input-players" class="padding">
-          <div>
-            <input type="text" placeholder="Jogador 1">
+        <form onsubmit="addManyPlayers()">
+          <div id="input-players" class="padding">
+            <div>
+              <input type="text" placeholder="Jogador 1">
+            </div>
+            <div>
+              <input type="text" placeholder="Jogador 2">
+            </div>
           </div>
-          <div>
-            <input type="text" placeholder="Jogador 2">
+          <div class="align-right" id="add-player-input">
+            <button class="text-blue-300 font-share link-add-right" onclick="addPlayerInput()">
+              Adicionar jogador
+            </button>
           </div>
-        </div>
-        <button class="text-blue-300 font-share full align-right link-add-right" id="add-player-input" onclick="addPlayerInput()">
-          Adicionar jogador
-        </button>
 
-        <br>
-        <button class="green radius font-share big" onclick="addManyPlayers()" style="width: 200px;">
-          Jogar
-        </button>
-        <button class="text-grey-300 font-share full" onclick="openPage('views/config')">
+          <br>
+          <button class="green radius font-share big btn-200" onclick="addManyPlayers()">
+            Jogar
+          </button>
+        </form>
+
+        <button class="text-grey-300 font-share btn-200" onclick="openPage('views/config')">
           Configurar jogo
         </button>
       </div>
@@ -114,6 +119,12 @@
           <i class="icon ion-close-round grey-600"></i>
         </div>
         <h1 class="text-grey-600">Excluir todos os jogadores</h1>
+      </a>
+      <a class="item" onclick="openPage('views/config')">
+        <div class="left">
+          <i class="icon ion-gear-a grey-600"></i>
+        </div>
+        <h1 class="text-grey-600">Configurações</h1>
       </a>
       <a class="item" onclick="openPage('views/rules')">
         <div class="left">

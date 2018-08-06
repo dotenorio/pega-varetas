@@ -198,10 +198,14 @@ a {
   margin-bottom: 0;
 }
 
+#first-players-content .btn-200 {
+  width: 200px;
+}
+
 .link-add-right {
   line-height: 20px;
   min-height: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   font-size: 14px;
 }
 
@@ -224,4 +228,17 @@ a {
 
 .menu .list .item h1:first-child {
   margin-top: 0;
+}
+
+.buttons-group.big button,
+button.big {
+  font-size: 20px;
+}
+
+#list-config-colors {
+  height: calc(100vh - 52px);
+}
+
+#list-config-colors .item {
+  height: 17.2%
 }
