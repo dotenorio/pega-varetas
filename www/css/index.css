@@ -295,3 +295,11 @@ button.big {
 #list-config-colors table tr.black td:last-child {
   border-bottom-right-radius: 5px;
 }
+
+#alert-player .ion-trash-b: before {
+  margin-top: 11px;
+}
+
+#alert-player .item.icon input {
+  padding-right: 30px;
+}
