@@ -35,7 +35,7 @@
 
         <p class="text-white">Digite o nome dos jogadores</p>
 
-        <form onsubmit="addManyPlayers()">
+        <form action="javascript:void(0)" onsubmit="addManyPlayers()">
           <div id="input-players" class="padding">
             <div>
               <input type="text" placeholder="Jogador 1">
@@ -51,12 +51,12 @@
           </div>
 
           <br>
-          <button class="green radius font-share big btn-200" onclick="addManyPlayers()">
+          <button type="submit" class="green radius font-share big btn-200">
             Jogar
           </button>
         </form>
 
-        <button class="text-grey-300 font-share btn-200" onclick="openPage('views/config')">
+        <button class="text-grey-300 font-share btn-200" onclick="openPage('views/config', openConfig)">
           Configurar jogo
         </button>
       </div>
@@ -120,7 +120,7 @@
         </div>
         <h1 class="text-grey-600">Excluir todos os jogadores</h1>
       </a>
-      <a class="item" onclick="openPage('views/config')">
+      <a class="item" onclick="openPage('views/config', openConfig)">
         <div class="left">
           <i class="icon ion-gear-a grey-600"></i>
         </div>

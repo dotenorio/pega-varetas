@@ -33,7 +33,8 @@
       "closeAlert",
       "closeMenu",
       "cordova",
-      "StatusBar"
+      "StatusBar",
+      "backPage"
     ],
     "ignore": [
       "www/mobileui"

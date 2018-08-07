@@ -6,16 +6,25 @@
     <h1 class="title align-center">Configurar jogo</h1>
   </div>
   <div class="content has-header">
-    <form>
-      <div class="list" id="list-config-colors">
-        <div class="item ${backgroundColor}" data="colors">
-          <label>${title}</label>
-          <input type="text" placeholder="quantidade">
-          <input type="text" placeholder="pontuação">
-        </div>
-        <div class="item">
-          <button class="green radius font-share big full">Login user</button>
-        </div>
+    <form action="javascript:void(0)" class="padding" onsubmit="saveConfig()">
+      <div id="list-config-colors">
+        <table class="table">
+          <tr>
+            <th width="30%" class="font-share">Cor</th>
+            <th class="font-share">Pontuação</th>
+            <th class="font-share">Quantidade</th>
+          </tr>
+          <tr data="colors" class="${backgroundColor}">
+            <td class="align-center text-${buttonColor} font-share">${title}</td>
+            <td>
+              <input type="number" placeholder="pontuação" value="${points}" class="font-titan">
+            </td>
+            <td>
+              <input type="number" placeholder="quantidade" value="${qty}" class="font-titan">
+            </td>
+          </tr>
+        </table>
+        <button type="submit" class="green radius font-share big full">Salvar configurações</button>
       </div>
     </form>
   </div>

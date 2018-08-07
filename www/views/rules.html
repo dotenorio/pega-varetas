@@ -21,30 +21,10 @@
           <th>Pontuação <span class="text-grey-600">*</span></th>
           <th>Quantidade <span class="text-grey-600">**</span></th>
         </tr>
-        <tr>
-          <td>Amarelo</td>
-          <td>05 pontos</td>
-          <td>14 varetas</td>
-        </tr>
-        <tr>
-          <td>Verde</td>
-          <td>10 pontos</td>
-          <td>6 varetas</td>
-        </tr>
-        <tr>
-          <td>Azul</td>
-          <td>35 pontos</td>
-          <td>6 varetas</td>
-        </tr>
-        <tr>
-          <td>Vermelho</td>
-          <td>50 pontos</td>
-          <td>14 varetas</td>
-        </tr>
-        <tr>
-          <td>Preta</td>
-          <td>100 pontos</td>
-          <td>1 vareta</td>
+        <tr data="colors">
+          <td>${title}</td>
+          <td>$$leftZero{points} pontos</td>
+          <td>$$leftZero{qty} $$writeQty{qty}</td>
         </tr>
       </table>
 

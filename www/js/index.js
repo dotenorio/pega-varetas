@@ -77,6 +77,18 @@ MobileUI.setWinnerBox = function (winner) {
   return winner ? 'winner' : ''
 }
 
+MobileUI.leftZero = function (n) {
+  n = parseInt(n)
+  if (n <= 9) {
+    return '0' + n
+  }
+  return n.toString()
+}
+
+MobileUI.writeQty = function (qty) {
+  return (qty === '1') ? 'vareta' : 'varetas'
+}
+
 function save () {
   window.localStorage.setItem('players', JSON.stringify(players))
 }
@@ -132,7 +144,10 @@ function setTotal (player) {
   for (var colorId in player.qty) {
     var qty = (player.qty[colorId] >= 0) ? player.qty[colorId] : 0
     var points = getColor(colorId).points
-    document.getElementById('player-qty-' + colorId).innerHTML = qty
+    var playerQty = document.getElementById('player-qty-' + colorId)
+    if (playerQty) {
+      playerQty.innerHTML = qty
+    }
     totalPoints += (qty * points)
   }
   document.getElementById('player-total-points').innerHTML = totalPoints + ' pontos'
@@ -158,7 +173,7 @@ function loadPlayer (index) {
   setName(player)
 }
 
-function removeItem(colorId) { // eslint-disable-line
+function removeItem (colorId) { // eslint-disable-line
   var player = getActivePlayer()
   player.qty[colorId]--
   setTotal(player)
@@ -166,7 +181,7 @@ function removeItem(colorId) { // eslint-disable-line
   setName(player)
 }
 
-function addItem(colorId) { // eslint-disable-line
+function addItem (colorId) { // eslint-disable-line
   var player = getActivePlayer()
   player.qty[colorId]++
   setTotal(player)
@@ -195,7 +210,7 @@ function noPlayerContent () {
   MobileUI.show('no-player-content')
 }
 
-function firstPlayers() { // eslint-disable-line
+function firstPlayers () { // eslint-disable-line
   changeStatusBar('#191919')
   MobileUI.hide('player-content')
   MobileUI.show('first-players-content')
@@ -297,7 +312,7 @@ function alertPlayer () {
   document.querySelector('.alert-mobileui #player-form-name').focus()
 }
 
-function addPlayer() { // eslint-disable-line
+function addPlayer () { // eslint-disable-line
   closeMenu('menu')
   if (players.length === 6) {
     alert({
@@ -321,7 +336,7 @@ function addPlayer() { // eslint-disable-line
   }
 }
 
-function addManyPlayers() { // eslint-disable-line
+function addManyPlayers () { // eslint-disable-line
   var inputs = document.querySelectorAll('#input-players input')
   var newPlayers = []
 
@@ -362,7 +377,7 @@ function addManyPlayers() { // eslint-disable-line
   save()
 }
 
-function editPlayer() { // eslint-disable-line
+function editPlayer () { // eslint-disable-line
   MobileUI.show('button-delete-player')
   var player = getActivePlayer()
   alertPlayer()
@@ -371,7 +386,7 @@ function editPlayer() { // eslint-disable-line
   playerIndexEditing = player.index
 }
 
-function removePlayer() { // eslint-disable-line
+function removePlayer () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer remover este jogador?',
@@ -403,7 +418,7 @@ function removePlayer() { // eslint-disable-line
   })
 }
 
-function restartPoints() { // eslint-disable-line
+function restartPoints () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer reiniciar a pontuação?',
@@ -440,7 +455,7 @@ function restartPoints() { // eslint-disable-line
   closeMenu('menu')
 }
 
-function removeAllPlayers() { // eslint-disable-line
+function removeAllPlayers () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer excluir todos os jogadores?',
@@ -468,7 +483,7 @@ function removeAllPlayers() { // eslint-disable-line
   closeMenu('menu')
 }
 
-function addPlayerInput() { // eslint-disable-line
+function addPlayerInput () { // eslint-disable-line
   var inputPlayersCount = document.querySelectorAll('#input-players input').length
 
   if (inputPlayersCount === 6) return
@@ -507,6 +522,14 @@ function removePlayerInput (el) {
   if (inputPlayers.length < 6) {
     MobileUI.show('add-player-input')
   }
+}
+
+function openConfig () { // eslint-disable-line
+  changeStatusBar('#757575')
+}
+
+function saveConfig () { // eslint-disable-line
+  backPage()
 }
 
 window.onload = function () {

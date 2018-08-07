@@ -226,6 +226,16 @@ a {
   height: 20%;
 }
 
+.row-color.yellow-300 {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.row-color.black {
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
 .menu .list .item h1:first-child {
   margin-top: 0;
 }
@@ -235,10 +245,42 @@ button.big {
   font-size: 20px;
 }
 
-#list-config-colors {
-  height: calc(100vh - 52px);
+#list-config-colors table {
+  height: calc(100vh - 145px);
 }
 
-#list-config-colors .item {
-  height: 17.2%
+#list-config-colors table tr th,
+#list-config-colors table tr td {
+  border: none;
+}
+
+#list-config-colors table tr td input {
+  width: 25vw;
+  height: 100%;
+  font-size: 2em;
+  text-align: center;
+}
+
+#list-config-colors table tr.black td input {
+  color: #FFF;
+}
+
+#list-config-colors button {
+  margin: 15px 0;
+}
+
+#list-config-colors table tr th:first-child {
+  border-top-left-radius: 5px;
+}
+
+#list-config-colors table tr th:last-child {
+  border-top-right-radius: 5px;
+}
+
+#list-config-colors table tr.black td:first-child {
+  border-bottom-left-radius: 5px;
+}
+
+#list-config-colors table tr.black td:last-child {
+  border-bottom-right-radius: 5px;
 }
