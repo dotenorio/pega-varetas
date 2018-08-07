@@ -80,17 +80,17 @@
         <h3 class="font-titan" id="player-total-points">0 pontos</h3>
         <p class="font-share" id="player-name">Jogador</p>
       </div>
-      <div class="coloxbox">
+      <div class="colorbox">
         <div class="row vertical-align-center ${backgroundColor} align-center row-color" data="colors">
           <div class="col">
-            <button class="icon ion-minus ${buttonColor} circle" onclick="removeItem('${id}')"></button>
+            <button class="icon ion-minus ${buttonColor} circle" id="player-qty-remove-${id}" onclick="removeItem('${id}')"></button>
           </div>
           <div class="col">
             <h3 class="font-titan" id="player-qty-${id}">0</h3>
             <p class="font-share">${title} (${points} pontos)</p>
           </div>
           <div class="col">
-            <button class="icon ion-plus ${buttonColor} circle" onclick="addItem('${id}')"></button>
+            <button class="icon ion-plus ${buttonColor} circle" id="player-qty-add-${id}" onclick="addItem('${id}')"></button>
           </div>
         </div>
       </div>
@@ -106,7 +106,7 @@
         <div class="left">
           <i class="icon ion-plus grey-600"></i>
         </div>
-        <h1 class="text-grey-600">Jogador</h1>
+        <h1 class="text-grey-600">Adicionar Jogador</h1>
       </a>
       <a class="item" onclick="restartPoints()">
         <div class="left">
@@ -124,13 +124,13 @@
         <div class="left">
           <i class="icon ion-gear-a grey-600"></i>
         </div>
-        <h1 class="text-grey-600">Configurações</h1>
+        <h1 class="text-grey-600">Configurar jogo</h1>
       </a>
       <a class="item" onclick="openPage('views/rules')">
         <div class="left">
           <i class="icon ion-ios-list-outline grey-600"></i>
         </div>
-        <h1 class="text-grey-600">Regras</h1>
+        <h1 class="text-grey-600">Ler Regras</h1>
       </a>
     </div>
   </div>

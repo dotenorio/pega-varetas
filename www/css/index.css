@@ -215,7 +215,7 @@ a {
   display: none;
 }
 
-.coloxbox {
+.colorbox {
   width: calc(100vw - 20px);
   left: 10px;
   height: calc(100vh - 193px);
@@ -236,6 +236,10 @@ a {
   border-bottom-right-radius: 5px;
 }
 
+.row-color .player-qty-button-disabled {
+  opacity: 0.5;
+}
+
 .menu .list .item h1:first-child {
   margin-top: 0;
 }
@@ -246,7 +250,7 @@ button.big {
 }
 
 #list-config-colors table {
-  height: calc(100vh - 145px);
+  height: calc(100vh - 175px);
 }
 
 #list-config-colors table tr th,
@@ -266,7 +270,14 @@ button.big {
 }
 
 #list-config-colors button {
-  margin: 15px 0;
+  margin: 15px 0 5px;
+}
+
+#list-config-colors button:last-child {
+  margin: 0;
+  font-size: 16px;
+  min-height: 30px;
+  line-height: 30px;
 }
 
 #list-config-colors table tr th:first-child {

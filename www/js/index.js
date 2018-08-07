@@ -1,5 +1,4 @@
-var playerIndexEditing = null
-var colors = [
+var defaultColors = [
   {
     id: 'yellow',
     title: 'Amarelo',
@@ -41,6 +40,8 @@ var colors = [
     qty: 1
   }
 ]
+var colors = []
+var playerIndexEditing = null
 var players = []
 
 if (window.localStorage.getItem('players')) {
@@ -48,6 +49,12 @@ if (window.localStorage.getItem('players')) {
   if (players.length > 0) {
     playerContent()
   }
+}
+
+if (window.localStorage.getItem('colors')) {
+  colors = JSON.parse(window.localStorage.getItem('colors'))
+} else {
+  colors = JSON.parse(JSON.stringify(defaultColors))
 }
 
 MobileUI.getPlayerFirstLetter = function (name) {
@@ -175,18 +182,51 @@ function loadPlayer (index) {
 
 function removeItem (colorId) { // eslint-disable-line
   var player = getActivePlayer()
-  player.qty[colorId]--
-  setTotal(player)
-  getWinner()
-  setName(player)
+  if (parseInt(player.qty[colorId]) > 0) {
+    player.qty[colorId]--
+    setTotal(player)
+    getWinner()
+    setName(player)
+    document.getElementById('player-qty-add-' + colorId).classList.remove('player-qty-button-disabled')
+  }
+  verifyQty()
 }
 
 function addItem (colorId) { // eslint-disable-line
+  var mayAdd = mayAddQty(colorId)
+  if (mayAdd) {
+    var player = getActivePlayer()
+    player.qty[colorId]++
+    setTotal(player)
+    getWinner()
+    setName(player)
+  }
+  verifyQty()
+}
+
+function verifyQty () {
   var player = getActivePlayer()
-  player.qty[colorId]++
-  setTotal(player)
-  getWinner()
-  setName(player)
+  colors.forEach(function (color) {
+    var mayAdd = mayAddQty(color.id)
+    if (!mayAdd) {
+      document.getElementById('player-qty-add-' + color.id).classList.add('player-qty-button-disabled')
+    } else {
+      document.getElementById('player-qty-add-' + color.id).classList.remove('player-qty-button-disabled')
+    }
+    if (player.qty[color.id] <= 0) {
+      document.getElementById('player-qty-remove-' + color.id).classList.add('player-qty-button-disabled')
+    } else {
+      document.getElementById('player-qty-remove-' + color.id).classList.remove('player-qty-button-disabled')
+    }
+  })
+}
+
+function mayAddQty (colorId) {
+  var color = getColor(colorId)
+  var totalVaretas = players.reduce(function (total, player) {
+    return (total + player.qty[colorId])
+  }, 0)
+  return (parseInt(color.qty) > parseInt(totalVaretas))
 }
 
 function changeStatusBar (hex, retry) {
@@ -529,7 +569,63 @@ function openConfig () { // eslint-disable-line
 }
 
 function saveConfig () { // eslint-disable-line
+  var inputs = document.querySelectorAll('#list-config-colors input')
+  var count = 0
+  colors = colors.map(function (color) {
+    if (inputs[count].value) {
+      color.points = inputs[count].value
+    }
+    count++
+
+    if (inputs[count].value) {
+      color.qty = inputs[count].value
+    }
+    count++
+
+    return color
+  })
+  window.localStorage.setItem('colors', JSON.stringify(colors))
   backPage()
+}
+
+function resetConfig () { // eslint-disable-line
+  alert({
+    title: 'Atenção',
+    message: 'Você tem certeza que quer restaurar as configurações?',
+    class: 'red',
+    buttons: [
+      {
+        label: 'Sim',
+        class: 'text-white',
+        onclick: function () {
+          var inputs = document.querySelectorAll('#list-config-colors input')
+          var count = 0
+          colors = JSON.parse(JSON.stringify(defaultColors)).map(function (color) {
+            if (color.points) {
+              inputs[count].value = color.points
+            }
+            count++
+
+            if (color.qty) {
+              inputs[count].value = color.qty
+            }
+            count++
+
+            return color
+          })
+          window.localStorage.setItem('colors', JSON.stringify(colors))
+          closeAlert()
+        }
+      },
+      {
+        label: 'Não',
+        class: 'text-white',
+        onclick: function () {
+          closeAlert()
+        }
+      }
+    ]
+  })
 }
 
 window.onload = function () {
@@ -540,6 +636,7 @@ window.onload = function () {
       setTotal(player)
     })
     getWinner()
+    verifyQty()
   } else {
     noPlayerContent()
   }

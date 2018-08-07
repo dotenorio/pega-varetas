@@ -16,15 +16,16 @@
           </tr>
           <tr data="colors" class="${backgroundColor}">
             <td class="align-center text-${buttonColor} font-share">${title}</td>
-            <td>
-              <input type="number" placeholder="pontuação" value="${points}" class="font-titan">
+            <td class="align-center">
+              <input type="number" placeholder="0" value="${points}" class="font-titan">
             </td>
-            <td>
-              <input type="number" placeholder="quantidade" value="${qty}" class="font-titan">
+            <td class="align-center">
+              <input type="number" placeholder="0" value="${qty}" class="font-titan">
             </td>
           </tr>
         </table>
         <button type="submit" class="green radius font-share big full">Salvar configurações</button>
+        <button onclick="resetConfig(); return false;" class="text-red font-share big full">Restaurar</button>
       </div>
     </form>
   </div>
