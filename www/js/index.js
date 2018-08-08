@@ -144,6 +144,7 @@ function setActive (index) {
   })
   document.getElementById('player-' + index).classList.add('active-player')
   document.getElementById('arrow-active-player').className = 'arrow-up arrow-' + index
+  verifyQty()
 }
 
 function setTotal (player) {

@@ -296,10 +296,10 @@ button.big {
   border-bottom-right-radius: 5px;
 }
 
-#alert-player .ion-trash-b: before {
+#button-delete-player .ion-trash-b:before {
   margin-top: 11px;
 }
 
-#alert-player .item.icon input {
+#player-form-name {
   padding-right: 30px;
 }
