@@ -46,6 +46,7 @@
     "cwd": "www/*.js"
   },
   "devDependencies": {
+    "cordova-res-generator": "^0.4.2",
     "standard": "^11.0.1"
   }
 }
