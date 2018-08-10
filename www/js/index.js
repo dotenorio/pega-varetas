@@ -414,7 +414,7 @@ function addManyPlayers () { // eslint-disable-line
 
   newPlayers.forEach(function (player, i) {
     var active = false
-    if (i === 1) {
+    if (i === 0) {
       active = true
     }
     savePlayer(player, {
