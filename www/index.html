@@ -108,7 +108,7 @@
         </div>
         <h1 class="text-grey-600">Adicionar Jogador</h1>
       </a>
-      <a class="item" onclick="restartPoints()">
+      <a class="item" onclick="restartPointsAlert()">
         <div class="left">
           <i class="icon ion-refresh grey-600"></i>
         </div>
@@ -143,6 +143,20 @@
           <button class="text-red small radius icon ion-trash-b"></button>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="hidden" id="alert-the-end">
+    <div class="padding align-center font-share" style="font-size: 20px;">
+      <i style="font-size: 40px;" class="icon ion-trophy text-amber"></i>
+      <div class="space"></div>
+      <b style="font-size: 25px;">{{Nome}}</b>
+      <div class="space"></div>
+      ganhou a partida com
+      <div class="space"></div>
+      <span class="text-red font-titan" style="font-size: 35px;">0 pontos</span>
+      <div class="space-big"></div>
+      <button class="green radius font-share" onclick="restartPoints(); closeAlert('alert-the-end-id');">Jogar novamente</button>
     </div>
   </div>
 

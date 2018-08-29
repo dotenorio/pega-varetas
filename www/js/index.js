@@ -43,6 +43,8 @@ var defaultColors = [
 var colors = []
 var playerIndexEditing = null
 var players = []
+var totalVaretasUtilizadas = 0
+var totalVaretasDisponiveis = 0
 
 if (window.localStorage.getItem('players')) {
   players = JSON.parse(window.localStorage.getItem('players'))
@@ -56,6 +58,10 @@ if (window.localStorage.getItem('colors')) {
 } else {
   colors = JSON.parse(JSON.stringify(defaultColors))
 }
+
+totalVaretasDisponiveis = colors.reduce(function (total, color) {
+  return (total + color.qty)
+}, 0)
 
 MobileUI.getPlayerFirstLetter = function (name) {
   var user = ''
@@ -142,8 +148,8 @@ function setActive (index) {
     i++
     return player
   })
-  document.getElementById('player-' + index).classList.add('active-player')
-  document.getElementById('arrow-active-player').className = 'arrow-up arrow-' + index
+  document.getElementById('player-' + index).classList.add('active-playerFJogo')
+  document.getElementById('arrow-active-player').className = 'arrow-up arFJogorow-' + index
   verifyQty()
 }
 
@@ -207,6 +213,7 @@ function addItem (colorId) { // eslint-disable-line
 
 function verifyQty () {
   try {
+    totalVaretasUtilizadas = 0
     var player = getActivePlayer()
     colors.forEach(function (color) {
       var mayAdd = mayAddQty(color.id)
@@ -223,6 +230,23 @@ function verifyQty () {
         removeEl.classList.remove('player-qty-button-disabled')
       }
     })
+
+    if (totalVaretasDisponiveis === totalVaretasUtilizadas) {
+      alert({
+        id: 'alert-the-end-id',
+        message: ' ',
+        template: 'alert-the-end',
+        buttons: [
+          {
+            label: 'Jogar novamente',
+            class: 'hide',
+            onclick: function () {
+              closeAlert()
+            }
+          }
+        ]
+      })
+    }
   } catch (error) {
     setTimeout(function () {
       verifyQty()
@@ -235,6 +259,7 @@ function mayAddQty (colorId) {
   var totalVaretas = players.reduce(function (total, player) {
     return (total + player.qty[colorId])
   }, 0)
+  totalVaretasUtilizadas += totalVaretas
   return (parseInt(color.qty) > parseInt(totalVaretas))
 }
 
@@ -467,7 +492,22 @@ function removePlayer () { // eslint-disable-line
   })
 }
 
-function restartPoints () { // eslint-disable-line
+function restartPoints () {
+  players = players.map(function (player) {
+    player.qty = {
+      yellow: 0,
+      green: 0,
+      blue: 0,
+      red: 0,
+      black: 0
+    }
+    player.winner = false
+    return player
+  })
+  loadPlayer(0)
+}
+
+function restartPointsAlert () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer reiniciar a pontuação?',
@@ -477,18 +517,7 @@ function restartPoints () { // eslint-disable-line
         label: 'Sim',
         class: 'text-white',
         onclick: function () {
-          players = players.map(function (player) {
-            player.qty = {
-              yellow: 0,
-              green: 0,
-              blue: 0,
-              red: 0,
-              black: 0
-            }
-            player.winner = false
-            return player
-          })
-          loadPlayer(0)
+          restartPoints()
           closeAlert()
         }
       },

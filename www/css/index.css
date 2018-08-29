@@ -303,3 +303,7 @@ button.big {
 #player-form-name {
   padding-right: 30px;
 }
+
+.hide {
+  display: none !important;
+}
