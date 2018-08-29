@@ -295,3 +295,11 @@ button.big {
 #list-config-colors table tr.black td:last-child {
   border-bottom-right-radius: 5px;
 }
+
+#button-delete-player .ion-trash-b:before {
+  margin-top: 11px;
+}
+
+#player-form-name {
+  padding-right: 30px;
+}

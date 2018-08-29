@@ -144,6 +144,7 @@ function setActive (index) {
   })
   document.getElementById('player-' + index).classList.add('active-player')
   document.getElementById('arrow-active-player').className = 'arrow-up arrow-' + index
+  verifyQty()
 }
 
 function setTotal (player) {
@@ -205,20 +206,28 @@ function addItem (colorId) { // eslint-disable-line
 }
 
 function verifyQty () {
-  var player = getActivePlayer()
-  colors.forEach(function (color) {
-    var mayAdd = mayAddQty(color.id)
-    if (!mayAdd) {
-      document.getElementById('player-qty-add-' + color.id).classList.add('player-qty-button-disabled')
-    } else {
-      document.getElementById('player-qty-add-' + color.id).classList.remove('player-qty-button-disabled')
-    }
-    if (player.qty[color.id] <= 0) {
-      document.getElementById('player-qty-remove-' + color.id).classList.add('player-qty-button-disabled')
-    } else {
-      document.getElementById('player-qty-remove-' + color.id).classList.remove('player-qty-button-disabled')
-    }
-  })
+  try {
+    var player = getActivePlayer()
+    colors.forEach(function (color) {
+      var mayAdd = mayAddQty(color.id)
+      var addEl = document.getElementById('player-qty-add-' + color.id)
+      var removeEl = document.getElementById('player-qty-remove-' + color.id)
+      if (!mayAdd) {
+        addEl.classList.add('player-qty-button-disabled')
+      } else {
+        addEl.classList.remove('player-qty-button-disabled')
+      }
+      if (player.qty[color.id] <= 0) {
+        removeEl.classList.add('player-qty-button-disabled')
+      } else {
+        removeEl.classList.remove('player-qty-button-disabled')
+      }
+    })
+  } catch (error) {
+    setTimeout(function () {
+      verifyQty()
+    }, 100)
+  }
 }
 
 function mayAddQty (colorId) {
@@ -405,7 +414,7 @@ function addManyPlayers () { // eslint-disable-line
 
   newPlayers.forEach(function (player, i) {
     var active = false
-    if (i === 1) {
+    if (i === 0) {
       active = true
     }
     savePlayer(player, {
