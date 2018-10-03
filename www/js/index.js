@@ -60,9 +60,13 @@ if (window.localStorage.getItem('colors')) {
   colors = JSON.parse(JSON.stringify(defaultColors))
 }
 
-totalVaretasDisponiveis = colors.reduce(function (total, color) {
-  return (total + color.qty)
-}, 0)
+function setTotalVaretasDisponiveis () {
+  totalVaretasDisponiveis = colors.reduce(function (total, color) {
+    return (total + parseInt(color.qty))
+  }, 0)
+}
+
+setTotalVaretasDisponiveis()
 
 MobileUI.getPlayerFirstLetter = function (name) {
   var user = ''
@@ -103,24 +107,24 @@ MobileUI.writeQty = function (qty) {
   return (qty === '1') ? 'vareta' : 'varetas'
 }
 
-function save() {
+function save () {
   window.localStorage.setItem('players', JSON.stringify(players))
 }
 
-function getColor(colorId) {
+function getColor (colorId) {
   return colors.filter(function (color) {
     return color.id === colorId
   })[0]
 }
 
-function getActivePlayer() {
+function getActivePlayer () {
   return players.filter(function (player, i) {
     player.index = i
     return player.active
   })[0]
 }
 
-function getWinner() {
+function getWinner () {
   var ranking = players.slice()
   ranking.sort(function (a, b) {
     if (a.totalPoints < b.totalPoints) { return -1 }
@@ -139,7 +143,7 @@ function getWinner() {
   }
 }
 
-function setActive(index) {
+function setActive (index) {
   var i = 0
   players = players.map(function (player) {
     player.active = false
@@ -154,7 +158,7 @@ function setActive(index) {
   verifyQty()
 }
 
-function setTotal(player) {
+function setTotal (player) {
   var totalPoints = 0
   for (var colorId in player.qty) {
     var qty = (player.qty[colorId] >= 0) ? player.qty[colorId] : 0
@@ -170,14 +174,14 @@ function setTotal(player) {
   save()
 }
 
-function setName(player) {
+function setName (player) {
   document.getElementById('player-name').innerHTML = player.name
   if (player.winner) {
     document.getElementById('player-name').innerHTML += ' - <span class="text-yellow"><i class="icon ion-record"></i> Ganhando </span>'
   }
 }
 
-function loadPlayer(index) {
+function loadPlayer (index) {
   var player = players[index]
 
   setTimeout(function () {
@@ -212,7 +216,7 @@ function addItem(colorId) { // eslint-disable-line
   verifyQty()
 }
 
-function verifyTheEnd() {
+function verifyTheEnd () {
   if (totalVaretasDisponiveis === totalVaretasUtilizadas && !verifedTheEnd) {
     verifedTheEnd = true
     var playerWinner = players.filter(function (player) {
@@ -224,21 +228,12 @@ function verifyTheEnd() {
       id: 'alert-the-end-id',
       message: ' ',
       template: 'alert-the-end',
-      buttons: [
-        {
-          label: 'Jogar novamente',
-          class: 'hide',
-          onclick: function () {
-            verifedTheEnd = false
-            closeAlert()
-          }
-        }
-      ]
+      buttons: []
     })
   }
 }
 
-function verifyQty() {
+function verifyQty () {
   try {
     totalVaretasUtilizadas = 0
     var player = getActivePlayer()
@@ -266,7 +261,7 @@ function verifyQty() {
   }
 }
 
-function mayAddQty(colorId) {
+function mayAddQty (colorId) {
   var color = getColor(colorId)
   var totalVaretas = players.reduce(function (total, player) {
     return (total + player.qty[colorId])
@@ -275,7 +270,7 @@ function mayAddQty(colorId) {
   return (parseInt(color.qty) > parseInt(totalVaretas))
 }
 
-function changeStatusBar(hex, retry) {
+function changeStatusBar (hex, retry) {
   if (!retry) retry = 0
   if (retry === 5) return
   try {
@@ -289,14 +284,14 @@ function changeStatusBar(hex, retry) {
   }
 }
 
-function noPlayerContent() {
+function noPlayerContent () {
   changeStatusBar('#191919')
   MobileUI.hide('player-content')
   MobileUI.hide('first-players-content')
   MobileUI.show('no-player-content')
 }
 
-function firstPlayers() { // eslint-disable-line
+function firstPlayers () { // eslint-disable-line
   changeStatusBar('#191919')
   MobileUI.hide('player-content')
   MobileUI.show('first-players-content')
@@ -309,14 +304,14 @@ function firstPlayers() { // eslint-disable-line
   })
 }
 
-function playerContent() {
+function playerContent () {
   changeStatusBar('#757575')
   MobileUI.show('player-content')
   MobileUI.hide('first-players-content')
   MobileUI.hide('no-player-content')
 }
 
-function savePlayer(nameElement, options) {
+function savePlayer (nameElement, options) {
   if (!options) {
     options = {}
   }
@@ -353,7 +348,7 @@ function savePlayer(nameElement, options) {
   playerContent()
 }
 
-function alertPlayer() {
+function alertPlayer () {
   alert({
     title: 'Jogador',
     id: 'alert-player-id',
@@ -398,7 +393,7 @@ function alertPlayer() {
   document.querySelector('.alert-mobileui #player-form-name').focus()
 }
 
-function addPlayer() { // eslint-disable-line
+function addPlayer () { // eslint-disable-line
   closeMenu('menu')
   if (players.length === 6) {
     alert({
@@ -422,7 +417,7 @@ function addPlayer() { // eslint-disable-line
   }
 }
 
-function addManyPlayers() { // eslint-disable-line
+function addManyPlayers () { // eslint-disable-line
   var inputs = document.querySelectorAll('#input-players input')
   var newPlayers = []
 
@@ -463,7 +458,7 @@ function addManyPlayers() { // eslint-disable-line
   save()
 }
 
-function editPlayer() { // eslint-disable-line
+function editPlayer () { // eslint-disable-line
   MobileUI.show('button-delete-player')
   var player = getActivePlayer()
   alertPlayer()
@@ -472,7 +467,7 @@ function editPlayer() { // eslint-disable-line
   playerIndexEditing = player.index
 }
 
-function removePlayer() { // eslint-disable-line
+function removePlayer () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer remover este jogador?',
@@ -504,7 +499,7 @@ function removePlayer() { // eslint-disable-line
   })
 }
 
-function restartPoints() {
+function restartPoints () {
   players = players.map(function (player) {
     player.qty = {
       yellow: 0,
@@ -519,7 +514,7 @@ function restartPoints() {
   loadPlayer(0)
 }
 
-function restartPointsAlert() { // eslint-disable-line
+function restartPointsAlert () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer reiniciar a pontuação?',
@@ -545,7 +540,7 @@ function restartPointsAlert() { // eslint-disable-line
   closeMenu('menu')
 }
 
-function removeAllPlayers() { // eslint-disable-line
+function removeAllPlayers () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer excluir todos os jogadores?',
@@ -573,7 +568,7 @@ function removeAllPlayers() { // eslint-disable-line
   closeMenu('menu')
 }
 
-function addPlayerInput() { // eslint-disable-line
+function addPlayerInput () { // eslint-disable-line
   var inputPlayersCount = document.querySelectorAll('#input-players input').length
 
   if (inputPlayersCount === 6) return
@@ -599,7 +594,7 @@ function addPlayerInput() { // eslint-disable-line
   inputPlayers.appendChild(div)
 }
 
-function removePlayerInput(el) {
+function removePlayerInput (el) {
   var parent = el.parentElement
   parent.parentNode.removeChild(parent)
 
@@ -614,11 +609,11 @@ function removePlayerInput(el) {
   }
 }
 
-function openConfig() { // eslint-disable-line
+function openConfig () { // eslint-disable-line
   changeStatusBar('#757575')
 }
 
-function saveConfig() { // eslint-disable-line
+function saveConfig () { // eslint-disable-line
   var inputs = document.querySelectorAll('#list-config-colors input')
   var count = 0
   colors = colors.map(function (color) {
@@ -635,10 +630,11 @@ function saveConfig() { // eslint-disable-line
     return color
   })
   window.localStorage.setItem('colors', JSON.stringify(colors))
+  setTotalVaretasDisponiveis()
   backPage()
 }
 
-function resetConfig() { // eslint-disable-line
+function resetConfig () { // eslint-disable-line
   alert({
     title: 'Atenção',
     message: 'Você tem certeza que quer restaurar as configurações?',
@@ -676,6 +672,12 @@ function resetConfig() { // eslint-disable-line
       }
     ]
   })
+}
+
+function playAgain () { // eslint-disable-line
+  restartPoints()
+  closeAlert('alert-the-end-id')
+  verifedTheEnd = false
 }
 
 window.onload = function () {
