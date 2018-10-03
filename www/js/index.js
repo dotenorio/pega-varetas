@@ -229,6 +229,7 @@ function verifyTheEnd() {
           label: 'Jogar novamente',
           class: 'hide',
           onclick: function () {
+            verifedTheEnd = false
             closeAlert()
           }
         }
