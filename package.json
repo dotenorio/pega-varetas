@@ -1,7 +1,7 @@
 {
   "name": "pegavaretas",
   "displayName": "Pega Varetas",
-  "version": "1.4.5",
+  "version": "1.4.6",
   "description": "Um jeito divertido de contar seus pontos no pega varetas",
   "main": "index.js",
   "scripts": {
@@ -12,8 +12,8 @@
   "author": "Fernando Migliorini Tenório",
   "license": "MIT",
   "dependencies": {
-    "cordova-android": "^7.1.0",
-    "cordova-browser": "^5.0.3",
+    "cordova-android": "^7.1.1",
+    "cordova-browser": "^5.0.4",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3"
@@ -48,5 +48,21 @@
   "devDependencies": {
     "cordova-res-generator": "^0.4.2",
     "standard": "^11.0.1"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dotenorio/pega-varetas.git"
+  },
+  "keywords": [
+    "pega-varetas",
+    "varetas",
+    "mobileui",
+    "pega",
+    "cordova",
+    "app"
+  ],
+  "bugs": {
+    "url": "https://github.com/dotenorio/pega-varetas/issues"
+  },
+  "homepage": "https://github.com/dotenorio/pega-varetas#readme"
 }

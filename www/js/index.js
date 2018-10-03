@@ -228,7 +228,16 @@ function verifyTheEnd () {
       id: 'alert-the-end-id',
       message: ' ',
       template: 'alert-the-end',
-      buttons: []
+      buttons: [
+        {
+          label: 'Jogar novamente',
+          class: 'hide',
+          onclick: function () {
+            verifedTheEnd = false
+            closeAlert()
+          }
+        }
+      ]
     })
   }
 }
