@@ -1,7 +1,7 @@
 {
   "name": "pegavaretas",
   "displayName": "Pega Varetas",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Um jeito divertido de contar seus pontos no pega varetas",
   "main": "index.js",
   "scripts": {
